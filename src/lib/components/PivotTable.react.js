@@ -5,6 +5,7 @@ import 'react-pivottable/pivottable.css';
 import TableRenderers from 'react-pivottable/TableRenderers';
 import Plot from 'react-plotly.js';
 import createPlotlyRenderers from 'react-pivottable/PlotlyRenderers';
+import propUpdater from 'react-pivottable/PivotTableUI';
 
 // create Plotly renderers via dependency injection
 const PlotlyRenderers = createPlotlyRenderers(Plot);
@@ -17,6 +18,7 @@ export default class PivotTable extends Component {
         super(props);
         this.state = props;
         this.handleChange = this.handleChange.bind(this);
+//		this.setState = this.setState.bind(this);
     }
 
     handleChange(state){
@@ -26,7 +28,9 @@ export default class PivotTable extends Component {
           rows,
           rowOrder,
           aggregatorName,
-          rendererName
+          rendererName,
+		  //added AGB
+		  selectData
         } = state;
 
         if (typeof this.props.setProps === 'function') {
@@ -36,13 +40,33 @@ export default class PivotTable extends Component {
                 rows,
                 rowOrder,
                 aggregatorName,
-                rendererName
+                rendererName,
+				//added AGB
+				selectData
             });
         }
 
         this.setState(state);
     }
-
+	
+/* 	componentWillMount() {
+        this.setState({
+			pivotState: {
+                tableOptions: {
+                    clickCallback: function(e, value, filters, pivotData) {
+                        var names = [];
+                        pivotData.forEachMatchingRecord(filters, function(
+                            record
+                        ) {
+                            names.push(record.global_id);
+                        });
+                        alert(names.join('\n'));
+                    },
+                },
+            },
+        });
+    } */
+	
     render() {
         const {
             data,
@@ -50,12 +74,17 @@ export default class PivotTable extends Component {
             hiddenFromAggregators,
             hiddenFromDragDrop,
             menuLimit,
-            unusedOrientationCutoff
+            unusedOrientationCutoff,
+			tableOptions,
+			//added AGB
+			selectData
         } = this.props;
 
         return (
             <PivotTableUI
                 data={data}
+				//ADDED AGB
+				selectData={data}
                 onChange={s => this.handleChange(s)}
                 renderers={Object.assign({}, TableRenderers, PlotlyRenderers)}
                 hiddenAttributes={hiddenAttributes}
@@ -63,6 +92,19 @@ export default class PivotTable extends Component {
                 hiddenFromDragDrop={hiddenFromDragDrop}
                 menuLimit={menuLimit}
                 unusedOrientationCutoff={unusedOrientationCutoff}
+				//sorters = {{age_at_death: function(a,b){ return Number(a)-Number(b);}}}
+				//ADDED AGB
+				tableOptions = {{clickCallback: function(e, value, filters, pivotData) 
+												{
+													var recs = [];
+													var dbg = [];
+													pivotData.forEachMatchingRecord(filters, 
+													//function(record){recs.push(record); dbg.push(typeof record.import_id); });
+													function(record){recs.push(record); dbg.push(record.import_id); });
+													//this took a lot of experimenting --don't mess with it AGB
+													this.handleChange({selectData: recs});
+													//alert(dbg.join('\n'));											
+												}.bind(this)} }
                 {...this.state}
             />
         );
@@ -95,6 +137,12 @@ PivotTable.propTypes = {
      * The input data
      */
     data: PropTypes.array,
+	
+	//ADDED AGB
+    /**
+     * selectData -- data selected by cell click 
+     */
+    selectData: PropTypes.array,	
 
     /**
      * contains attribute names to omit from the UI
@@ -169,5 +217,15 @@ PivotTable.propTypes = {
      * Which renderer is currently selected. E.g. Table, Line Chart, Scatter
      * Chart, etc.
      */
-    rendererName: PropTypes.string
+    rendererName: PropTypes.string,
+	
+	 /**
+     * tableOptions -- were clickCallback is placed 
+	 * it is a Function to call when mouse clicks on cell
+	 * function(e, value, filters, pivotData) 
+     */
+    tableOptions: PropTypes.object
+
+		
+	
 };

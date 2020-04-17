@@ -39,8 +39,8 @@
     "react-docgen": "^2.20.1",
     "react-dom": "^16.8.3",
     "style-loader": "^0.21.0",
-    "webpack": "^4.20.2",
-    "webpack-cli": "^3.1.1",
+    "webpack": "^4.41.5",
+    "webpack-cli": "^3.3.10",
     "webpack-serve": "^1.0.2"
   },
   "engines": {
