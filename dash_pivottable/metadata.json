@@ -38,6 +38,50 @@
         "required": false,
         "description": "The input data"
       },
+      "attrClassified": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "attrClassified -- whether to show the unused attributes as classfied",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "attrDict": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "attrDict -- attribute dictionary for classfied, with [key = category name] => [value: attributes]",
+        "defaultValue": {
+          "value": "{}",
+          "computed": false
+        }
+      },
+      "unclassifiedAttrName": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "The name of category for attributes that are not in the attrDict",
+        "defaultValue": {
+          "value": "\"Unclassified\"",
+          "computed": false
+        }
+      },
+      "attrOrder": {
+        "type": {
+          "name": "array"
+        },
+        "required": false,
+        "description": "Specify the default order of attributes",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
+      },
       "selectData": {
         "type": {
           "name": "array"

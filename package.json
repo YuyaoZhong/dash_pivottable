@@ -19,7 +19,7 @@
   "dependencies": {
     "plotly.js": "^1.44.4",
     "ramda": "^0.25.0",
-    "react-pivottable": "^0.9.0",
+    "react-pivottable-custom": "0.0.5",
     "react-plotly.js": "^2.3.0"
   },
   "devDependencies": {

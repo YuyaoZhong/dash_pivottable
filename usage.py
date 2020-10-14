@@ -22,7 +22,14 @@ app.layout = html.Div([
         rendererName="Grouped Column Chart",
         aggregatorName="Average",
         vals=["Total Bill"],
-        valueFilter={'Day of Week': {'Thursday': False}}
+        valueFilter={'Day of Week': {'Thursday': False}},
+        attrClassified=True,
+        attrDict={
+                    "Payer": ['Payer Gender','Payer Smoker'],
+                    "Money": ['Tip', 'Total Bill'],
+                },
+        unclassifiedAttrName="Others",
+        attrOrder=["Meal", "Day of Week", "Party Size", "Total Bill", "Tip", "Payer Smoker", "Payer Gender"],
     ),
     dcc.Markdown(
         id='output'

@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import PivotTableUI from 'react-pivottable/PivotTableUI';
-import 'react-pivottable/pivottable.css';
-import TableRenderers from 'react-pivottable/TableRenderers';
+import PivotTableUI from 'react-pivottable-custom/PivotTableUI'
+// import PivotTableUI from 'react-pivottable/PivotTableUI';
+import 'react-pivottable-custom/pivottable.css';
+import TableRenderers from 'react-pivottable-custom/TableRenderers';
 import Plot from 'react-plotly.js';
-import createPlotlyRenderers from 'react-pivottable/PlotlyRenderers';
-import propUpdater from 'react-pivottable/PivotTableUI';
+import createPlotlyRenderers from 'react-pivottable-custom/PlotlyRenderers';
+import { props } from 'ramda';
+// import propUpdater from 'react-pivottable/PivotTableUI'
 
 // create Plotly renderers via dependency injection
 const PlotlyRenderers = createPlotlyRenderers(Plot);
@@ -30,7 +32,8 @@ export default class PivotTable extends Component {
           aggregatorName,
           rendererName,
 		  //added AGB
-		  selectData
+          selectData,
+
         } = state;
 
         if (typeof this.props.setProps === 'function') {
@@ -42,7 +45,7 @@ export default class PivotTable extends Component {
                 aggregatorName,
                 rendererName,
 				//added AGB
-				selectData
+                selectData,
             });
         }
 
@@ -77,14 +80,24 @@ export default class PivotTable extends Component {
             unusedOrientationCutoff,
 			tableOptions,
 			//added AGB
-			selectData
+            selectData,
+            //added attrs for classfied atrributes
+            attrClassified,
+            attrDict,
+            unclassifiedAttrName,
+            attrOrder,
         } = this.props;
 
         return (
             <PivotTableUI
                 data={data}
 				//ADDED AGB
-				selectData={data}
+                selectData={data}
+                //ADDED Attributes
+                attrClassified = {attrClassified}
+                attrDict = {attrDict}
+                unclassifiedAttrName = {unclassifiedAttrName}
+                attrOrder = {attrOrder}
                 onChange={s => this.handleChange(s)}
                 renderers={Object.assign({}, TableRenderers, PlotlyRenderers)}
                 hiddenAttributes={hiddenAttributes}
@@ -116,7 +129,11 @@ PivotTable.defaultProps = {
     unusedOrientationCutoff: 85,
     hiddenAttributes: [],
     hiddenFromAggregators: [],
-    hiddenFromDragDrop: []
+    hiddenFromDragDrop: [],
+    attrClassified: false,
+    attrDict: {},
+    unclassifiedAttrName: "Unclassified",
+    attrOrder: []
 };
 
 PivotTable.propTypes = {
@@ -130,14 +147,39 @@ PivotTable.propTypes = {
      * properties change
      */
     setProps: PropTypes.func,
-
+      
     // MODIFIABLE PROPS
 
     /**
      * The input data
      */
     data: PropTypes.array,
-	
+
+    // Added for classified
+    /**
+     * attrClassified -- whether to show the unused attributes as classfied
+     */
+    attrClassified: PropTypes.bool,
+
+    // Added for classfied
+    /**
+     * attrDict -- attribute dictionary for classfied, with [key = category name] => [value: attributes]
+     */
+    attrDict: PropTypes.object,
+
+    // Added for classified
+    /**
+     * The name of category for attributes that are not in the attrDict
+     */
+    unclassifiedAttrName: PropTypes.string,
+
+    // Added for orders of attributes
+    /**
+     * Specify the default order of attributes
+     */
+    attrOrder: PropTypes.array,
+
+
 	//ADDED AGB
     /**
      * selectData -- data selected by cell click 

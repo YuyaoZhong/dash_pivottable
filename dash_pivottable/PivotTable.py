@@ -10,6 +10,10 @@ class PivotTable(Component):
 Keyword arguments:
 - id (string; optional): The ID used to identify this component in Dash callbacks
 - data (list; optional): The input data
+- attrClassified (boolean; default False): attrClassified -- whether to show the unused attributes as classfied
+- attrDict (dict; optional): attrDict -- attribute dictionary for classfied, with [key = category name] => [value: attributes]
+- unclassifiedAttrName (string; default "Unclassified"): The name of category for attributes that are not in the attrDict
+- attrOrder (list; optional): Specify the default order of attributes
 - selectData (list; optional): selectData -- data selected by cell click
 - hiddenAttributes (list; optional): contains attribute names to omit from the UI
 - hiddenFromAggregators (list; optional): contains attribute names to omit from the aggregator arguments dropdowns
@@ -36,12 +40,12 @@ Chart, etc.
 it is a Function to call when mouse clicks on cell
 function(e, value, filters, pivotData)"""
     @_explicitize_args
-    def __init__(self, id=Component.UNDEFINED, data=Component.UNDEFINED, selectData=Component.UNDEFINED, hiddenAttributes=Component.UNDEFINED, hiddenFromAggregators=Component.UNDEFINED, hiddenFromDragDrop=Component.UNDEFINED, menuLimit=Component.UNDEFINED, unusedOrientationCutoff=Component.UNDEFINED, cols=Component.UNDEFINED, colOrder=Component.UNDEFINED, rows=Component.UNDEFINED, rowOrder=Component.UNDEFINED, aggregatorName=Component.UNDEFINED, vals=Component.UNDEFINED, valueFilter=Component.UNDEFINED, rendererName=Component.UNDEFINED, tableOptions=Component.UNDEFINED, **kwargs):
-        self._prop_names = ['id', 'data', 'selectData', 'hiddenAttributes', 'hiddenFromAggregators', 'hiddenFromDragDrop', 'menuLimit', 'unusedOrientationCutoff', 'cols', 'colOrder', 'rows', 'rowOrder', 'aggregatorName', 'vals', 'valueFilter', 'rendererName', 'tableOptions']
+    def __init__(self, id=Component.UNDEFINED, data=Component.UNDEFINED, attrClassified=Component.UNDEFINED, attrDict=Component.UNDEFINED, unclassifiedAttrName=Component.UNDEFINED, attrOrder=Component.UNDEFINED, selectData=Component.UNDEFINED, hiddenAttributes=Component.UNDEFINED, hiddenFromAggregators=Component.UNDEFINED, hiddenFromDragDrop=Component.UNDEFINED, menuLimit=Component.UNDEFINED, unusedOrientationCutoff=Component.UNDEFINED, cols=Component.UNDEFINED, colOrder=Component.UNDEFINED, rows=Component.UNDEFINED, rowOrder=Component.UNDEFINED, aggregatorName=Component.UNDEFINED, vals=Component.UNDEFINED, valueFilter=Component.UNDEFINED, rendererName=Component.UNDEFINED, tableOptions=Component.UNDEFINED, **kwargs):
+        self._prop_names = ['id', 'data', 'attrClassified', 'attrDict', 'unclassifiedAttrName', 'attrOrder', 'selectData', 'hiddenAttributes', 'hiddenFromAggregators', 'hiddenFromDragDrop', 'menuLimit', 'unusedOrientationCutoff', 'cols', 'colOrder', 'rows', 'rowOrder', 'aggregatorName', 'vals', 'valueFilter', 'rendererName', 'tableOptions']
         self._type = 'PivotTable'
         self._namespace = 'dash_pivottable'
         self._valid_wildcard_attributes =            []
-        self.available_properties = ['id', 'data', 'selectData', 'hiddenAttributes', 'hiddenFromAggregators', 'hiddenFromDragDrop', 'menuLimit', 'unusedOrientationCutoff', 'cols', 'colOrder', 'rows', 'rowOrder', 'aggregatorName', 'vals', 'valueFilter', 'rendererName', 'tableOptions']
+        self.available_properties = ['id', 'data', 'attrClassified', 'attrDict', 'unclassifiedAttrName', 'attrOrder', 'selectData', 'hiddenAttributes', 'hiddenFromAggregators', 'hiddenFromDragDrop', 'menuLimit', 'unusedOrientationCutoff', 'cols', 'colOrder', 'rows', 'rowOrder', 'aggregatorName', 'vals', 'valueFilter', 'rendererName', 'tableOptions']
         self.available_wildcard_properties =            []
 
         _explicit_args = kwargs.pop('_explicit_args')
