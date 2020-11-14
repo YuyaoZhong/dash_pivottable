@@ -6,7 +6,6 @@ import 'react-pivottable-custom/pivottable.css';
 import TableRenderers from 'react-pivottable-custom/TableRenderers';
 import Plot from 'react-plotly.js';
 import createPlotlyRenderers from 'react-pivottable-custom/PlotlyRenderers';
-import { props } from 'ramda';
 // import propUpdater from 'react-pivottable/PivotTableUI'
 
 // create Plotly renderers via dependency injection
@@ -83,7 +82,7 @@ export default class PivotTable extends Component {
             selectData,
             //added attrs for classfied atrributes
             attrClassified,
-            attrDict,
+            attrCategory,
             unclassifiedAttrName,
             attrOrder,
         } = this.props;
@@ -95,7 +94,7 @@ export default class PivotTable extends Component {
                 selectData={data}
                 //ADDED Attributes
                 attrClassified = {attrClassified}
-                attrDict = {attrDict}
+                attrCategory = {attrCategory}
                 unclassifiedAttrName = {unclassifiedAttrName}
                 attrOrder = {attrOrder}
                 onChange={s => this.handleChange(s)}
@@ -131,7 +130,7 @@ PivotTable.defaultProps = {
     hiddenFromAggregators: [],
     hiddenFromDragDrop: [],
     attrClassified: false,
-    attrDict: {},
+    attrCategory: {},
     unclassifiedAttrName: "Unclassified",
     attrOrder: []
 };
@@ -163,9 +162,9 @@ PivotTable.propTypes = {
 
     // Added for classfied
     /**
-     * attrDict -- attribute dictionary for classfied, with [key = category name] => [value: attributes]
+     * attribute list
      */
-    attrDict: PropTypes.object,
+    attrCategory: PropTypes.array,
 
     // Added for classified
     /**

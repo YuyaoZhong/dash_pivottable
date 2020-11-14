@@ -24,10 +24,46 @@ app.layout = html.Div([
         vals=["Total Bill"],
         valueFilter={'Day of Week': {'Thursday': False}},
         attrClassified=True,
-        attrDict={
-                    "Payer": ['Payer Gender','Payer Smoker'],
-                    "Money": ['Tip', 'Total Bill'],
-                },
+        attrCategory=[
+            {
+                "name": "Payer",
+                "subcategory": [
+                    {
+                        "name": "Test1",
+                        "attributes": ['Payer Smoker'],
+                        "subcategory": [
+                            {
+                                "name": "Test2",
+                                "attributes": ['Payer Gender']
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "name": "Money",
+                "attributes": ['Tip', 'Total Bill']
+            },
+            {
+                "name": "Others",
+                "subcategory": [
+                    {
+                        "name": "Test1",
+                        "attributes": ['Meal'],
+                        "subcategory": [
+                            {
+                                "name": "Test2",
+                                "attributes": ['Day of Week']
+                            },
+                            {
+                                "name": "Test3",
+                                "attributes": ['Party Size']
+                            }
+                        ]
+                    },
+                ]
+            }
+        ],
         unclassifiedAttrName="Others",
         attrOrder=["Meal", "Day of Week", "Party Size", "Total Bill", "Tip", "Payer Smoker", "Payer Gender"],
     ),
