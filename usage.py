@@ -64,6 +64,9 @@ app.layout = html.Div([
                 ]
             }
         ],
+        attrLabel={
+            'Tip': 'test label of tip'
+        },
         unclassifiedAttrName="Others",
         attrOrder=["Meal", "Day of Week", "Party Size", "Total Bill", "Tip", "Payer Smoker", "Payer Gender"],
     ),

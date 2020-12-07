@@ -56,7 +56,7 @@
         "required": false,
         "description": "attribute list",
         "defaultValue": {
-          "value": "{}",
+          "value": "[]",
           "computed": false
         }
       },
@@ -79,6 +79,17 @@
         "description": "Specify the default order of attributes",
         "defaultValue": {
           "value": "[]",
+          "computed": false
+        }
+      },
+      "attrLabel": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "The label should have format of {[attrName]: label}",
+        "defaultValue": {
+          "value": "{}",
           "computed": false
         }
       },

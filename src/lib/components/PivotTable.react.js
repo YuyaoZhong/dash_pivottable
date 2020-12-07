@@ -85,6 +85,7 @@ export default class PivotTable extends Component {
             attrCategory,
             unclassifiedAttrName,
             attrOrder,
+            attrLabel,
         } = this.props;
 
         return (
@@ -93,6 +94,7 @@ export default class PivotTable extends Component {
 				//ADDED AGB
                 selectData={data}
                 //ADDED Attributes
+                attrLabel = {attrLabel}
                 attrClassified = {attrClassified}
                 attrCategory = {attrCategory}
                 unclassifiedAttrName = {unclassifiedAttrName}
@@ -130,9 +132,10 @@ PivotTable.defaultProps = {
     hiddenFromAggregators: [],
     hiddenFromDragDrop: [],
     attrClassified: false,
-    attrCategory: {},
+    attrCategory: [],
     unclassifiedAttrName: "Unclassified",
-    attrOrder: []
+    attrOrder: [],
+    attrLabel: {},
 };
 
 PivotTable.propTypes = {
@@ -177,6 +180,12 @@ PivotTable.propTypes = {
      * Specify the default order of attributes
      */
     attrOrder: PropTypes.array,
+
+    // Added for showing label of attributes
+    /**
+     * The label should have format of {[attrName]: label}
+     */
+    attrLabel: PropTypes.object,
 
 
 	//ADDED AGB
