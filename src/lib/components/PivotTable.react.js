@@ -92,7 +92,7 @@ export default class PivotTable extends Component {
             <PivotTableUI
                 data={data}
 				//ADDED AGB
-                selectData={data}
+                //selectData={data}
                 //ADDED Attributes
                 attrLabel = {attrLabel}
                 attrClassified = {attrClassified}
@@ -111,10 +111,11 @@ export default class PivotTable extends Component {
 				tableOptions = {{clickCallback: function(e, value, filters, pivotData) 
 												{
 													var recs = [];
-													var dbg = [];
+													//var dbg = [];
 													pivotData.forEachMatchingRecord(filters, 
 													//function(record){recs.push(record); dbg.push(typeof record.import_id); });
-													function(record){recs.push(record); dbg.push(record.import_id); });
+													//function(record){recs.push(record); dbg.push(record.import_id); });
+													function(record) { recs.push(record.uuid); });
 													//this took a lot of experimenting --don't mess with it AGB
 													this.handleChange({selectData: recs});
 													//alert(dbg.join('\n'));											
